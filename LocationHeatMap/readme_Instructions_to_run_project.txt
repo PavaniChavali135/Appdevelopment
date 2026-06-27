@@ -6,6 +6,8 @@ Copy the whole folder to the pc and open it through the visual studio code and g
 Below command to run it  "dotnet build -t:Run -f net10.0-android" , before this add "googleAPIkey" in the last line to the 
 "AndroidManifest.xml" in platforms ->android folder.
 
+once the project is run the simulator will ask for accessing the location permission and after that click on start button and give your coordinates.you can see the tracking on that coordinate points on the app.
+
 
 Prerequisites:
 
