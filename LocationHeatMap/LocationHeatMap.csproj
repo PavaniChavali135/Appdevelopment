@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!--
+			NOTE: This targets net10.0-android because that matches the .NET 10 SDK.
+			If you installed only the maui-android workload (no iOS/MacCatalyst runtime),
+			keep this as just net10.0-android. Add the others back once those
+			workloads are installed:
+			<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+		-->
+		<TargetFrameworks>net10.0-android</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>LocationHeatMap</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>Location Heat Map</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.university.locationheatmap</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<!--
+			Android API level: this machine's installed Android SDK only has
+			platform 36.x available (confirmed via build error NETSDK1140),
+			so we let .NET 10's default (API 36) apply rather than pinning
+			to 34. If you later install platform 34 via sdkmanager, you can
+			pin back to 34 if you prefer an older/more stable API surface.
+		-->
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">24.0</SupportedOSPlatformVersion>
+
+
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-maccatalyst'))">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.19041.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.19041.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\Images\appicon.svg" ForegroundFile="Resources\Images\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- No generic MauiImage items: this project's only images are the
+		     app icon and splash screen, both already declared above via
+		     MauiIcon / MauiSplashScreen. Adding a MauiImage wildcard over
+		     the same folder causes the Resizetizer to generate duplicate
+		     output filenames and fail the build. If you add standalone
+		     in-app images later, give them their own subfolder, e.g.
+		     Resources\Images\App\*, and reference that instead. -->
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Explicit reference required since .NET 8+: UseMaui no longer implicitly
+		     pulls this in. Version matches the MAUI SDK bundled with .NET 10 (10.0.20). -->
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
+
+		<!-- .NET MAUI Maps control -->
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="10.0.51" />
+
+		<!-- SQLite for local persistence -->
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+
+		<!-- MVVM helpers (ObservableObject, RelayCommand) -->
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+
+		<!-- Dependency Injection extensions (used by MauiProgram) -->
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+</Project>
