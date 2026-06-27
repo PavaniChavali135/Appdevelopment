@@ -1,7 +1,8 @@
 Instruction on running this location tracker code:
 
 Copy the whole folder to the pc and open it through the visual studio code and give the 
-Below command to run it  "dotnet build -t:Run -f net10.0-android"
+Below command to run it  "dotnet build -t:Run -f net10.0-android" , before this add "googleAPIkey" in the last line to the 
+"AndroidManifest.xml" in platforms ->android folder.
 
 Prerequisites:
 
