@@ -1,8 +1,11 @@
 Instruction on running this location tracker code:
 
+Make sure to open a simulator android device before running the command, i used android studio to simulate pikexl8 android device.
+
 Copy the whole folder to the pc and open it through the visual studio code and give the 
 Below command to run it  "dotnet build -t:Run -f net10.0-android" , before this add "googleAPIkey" in the last line to the 
 "AndroidManifest.xml" in platforms ->android folder.
+
 
 Prerequisites:
 
