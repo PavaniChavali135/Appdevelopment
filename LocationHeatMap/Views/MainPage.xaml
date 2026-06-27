@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="LocationHeatMap.Views.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:vm="clr-namespace:LocationHeatMap.ViewModels"
+             Title="Location Heat Map">
+
+    <Grid RowDefinitions="*, Auto">
+
+        <!-- Map + heat map overlay share the same cell so the GraphicsView draws on top of the map. -->
+        <Grid Grid.Row="0">
+
+            <maps:Map x:Name="MapView"
+                      IsShowingUser="True"
+                      MapType="Street"
+                      ZIndex="0" />
+
+            <!-- Transparent overlay: this is where the custom heat map is painted.
+                 InputTransparent lets pan/pinch gestures pass through to the Map beneath it.
+                 ZIndex is set explicitly because the native Map control on Android renders
+                 via a SurfaceView, whose content can be composited outside the normal view
+                 hierarchy — meaning declaration order in XML alone is not always sufficient
+                 to guarantee this overlay paints on top. -->
+            <GraphicsView x:Name="HeatMapOverlay"
+                          InputTransparent="True"
+                          BackgroundColor="Transparent"
+                          ZIndex="1" />
+
+        </Grid>
+
+        <!-- Controls -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*, Auto, Auto"
+              Padding="12"
+              ColumnSpacing="8"
+              BackgroundColor="{AppThemeBinding Light=White, Dark=#1c1c1e}">
+
+            <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                <Label Text="{Binding StatusText}" FontAttributes="Bold" FontSize="14" />
+                <Label Text="{Binding RecordedPointCount, StringFormat='{0} points stored'}" FontSize="12" Opacity="0.6" />
+            </VerticalStackLayout>
+
+            <Button Grid.Column="1"
+                    Text="{Binding IsTracking, Converter={StaticResource TrackingButtonTextConverter}}"
+                    Command="{Binding ToggleTrackingCommand}"
+                    BackgroundColor="{Binding IsTracking, Converter={StaticResource TrackingButtonColorConverter}}"
+                    TextColor="White" />
+
+            <Button Grid.Column="2"
+                    Text="Clear"
+                    Command="{Binding ClearHistoryCommand}"
+                    BackgroundColor="Gray"
+                    TextColor="White" />
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

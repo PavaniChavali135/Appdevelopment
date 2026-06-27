@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+    <!-- Simple location-pin glyph for the splash screen, white on transparent -->
+    <path d="M64 24
+             C44 24 28 40 28 60
+             C28 88 64 104 64 104
+             C64 104 100 88 100 60
+             C100 40 84 24 64 24 Z"
+          fill="#FFFFFF" />
+    <circle cx="64" cy="60" r="11" fill="#512BD4" />
+</svg>

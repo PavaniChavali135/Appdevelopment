@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" width="432" height="432">
+    <!-- Simple location-pin glyph, white on transparent, used as the icon foreground -->
+    <path d="M216 96
+             C166 96 126 136 126 186
+             C126 256 216 336 216 336
+             C216 336 306 256 306 186
+             C306 136 266 96 216 96 Z"
+          fill="#FFFFFF" />
+    <circle cx="216" cy="186" r="34" fill="#512BD4" />
+</svg>

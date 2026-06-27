@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.university.locationheatmap">
+
+	<!-- ===================== Location permissions ===================== -->
+	<!-- Coarse + fine: required to read GPS / network-based location while the app is open. -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+	<!-- Background location: required (Android 10+) to keep recording fixes
+	     while the app is not in the foreground. Google Play requires a
+	     prominent in-app disclosure before requesting this permission. -->
+	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+	<!-- Needed to run a foreground service that keeps GPS polling alive
+	     with a persistent notification (Android 9+ requirement for
+	     long-running background work). -->
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
+	<!-- Standard networking permissions used by the Maps SDK tiles and Geolocation provider. -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+	<!-- Lets the OS know this app genuinely uses GPS hardware (not just network location). -->
+	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+	<application android:allowBackup="true"
+	              android:icon="@mipmap/appicon"
+	              android:roundIcon="@mipmap/appicon_round"
+	              android:supportsRtl="true">
+
+		<!-- ===================== Google Maps API key ===================== -->
+		<!-- Required by Microsoft.Maui.Controls.Maps on Android. Get a key from
+		     https://console.cloud.google.com/ (enable "Maps SDK for Android"),
+		     then replace YOUR_GOOGLE_MAPS_API_KEY_HERE below. -->
+		<meta-data android:name="com.google.android.geo.API_KEY"
+		           android:value="Giveyourgoogleapikey" />
+
+	</application>
+
+</manifest>
